@@ -26,7 +26,7 @@ module.exports = {
   },
   mode: 'spa',
   head: {
-    title: "tt1",
+    title: "sprintus",
     meta: [
       { charset: "utf-8" },
       {
