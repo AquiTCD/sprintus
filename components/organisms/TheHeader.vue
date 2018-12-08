@@ -1,38 +1,24 @@
 <template lang="pug">
   header.the_header
-    vs-navbar(v-model="activeItem" class="nabarx")
-     vs-button(type="flat" radius="50%" icon="menu")
-     vs-navbar-title Sprintus
-     vs-navbar-item(index="0")
-       a(href="#") Home
-     vs-navbar-item(index="1")
-       a(href="#") News
-     vs-navbar-item(index="2")
-       a(href="#") Update
-     vs-spacer
-     vs-input(icon="search" placeholder="Search" v-model="search")
+    vs-navbar.brand(v-model="activeItem"
+              color="primary")
+      vs-navbar-title.brand Sprintus
+
+      vs-spacer
+      vs-button.new-task_btn(color="secondary" type="filled" icon="add_box") New Task
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import Headerbrand from '~/components/atoms/HeaderSiteTitle.vue'
-// import HeaderContentTitle from '~/components/atoms/HeaderContentTitle.vue'
-@Component({
-  components: {
-    // HeaderSiteTitle,
-    // HeaderContentTitle,
-  },
-})
-export default class TheHeader extends Vue {
-  // @Prop(Object) site!: object
-  // @Prop(Object) page!: object
-}
+@Component
+export default class TheHeader extends Vue {}
 </script>
 
 <style scoped lang="stylus">
-.the_header
-  align-items: flex-end
-  display: flex
-  flex-direction: column
-  width: 100%
+.brand
+  color: $pure-black
+  font-size: 1em
+.new-task_btn
+  font-size: 0.8em
+  font-weight: bold
 </style>
