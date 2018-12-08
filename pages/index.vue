@@ -1,21 +1,35 @@
 <template lang="pug">
-  ul
-    p fb test
-    li(v-for="(user, userIdx) in users"
-      :key="userIdx")
-      ul
-        li {{ user.name }}
+  main.main
+    TheTimeline.the-timeline(
+      :me="me"
+      :events="timelineEvents")
+    TheBoard.the-board
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { State, Getter, Action } from 'vuex-class'
-@Component
+import TheTimeline from '~/components/organisms/TheTimeline.vue'
+import TheBoard from '~/components/organisms/TheBoard.vue'
+@Component({
+  components: {
+    TheTimeline,
+    TheBoard,
+  },
+})
 export default class extends Vue {
+  @Getter getMe
   @Getter getUsers
+  @Getter getTimelineEvents
   @Action setUsersRef
   created() {
     this.setUsersRef()
+  }
+  get me() {
+    return this.getMe
+  }
+  get timelineEvents() {
+    return this.getTimelineEvents
   }
   get users() {
     return this.getUsers
@@ -24,4 +38,11 @@ export default class extends Vue {
 </script>
 
 <style scoped lang="stylus">
+.main
+  display: flex
+  height: 100vh
+.the-timeline
+  border-right: $grey-tint 5px solid
+  height: 100%
+  width: 256px
 </style>
