@@ -3,7 +3,12 @@
     TheTimeline.the-timeline(
       :me="me"
       :events="timelineEvents")
-    TheBoard.the-board
+    TheBoard.the-board(
+      :holiday_wdays="holiday_wdays"
+      :beggining_wday="beggining_wday"
+      :tasks="tasks"
+      :me="me"
+    )
 </template>
 
 <script lang="ts">
@@ -21,6 +26,8 @@ export default class extends Vue {
   @Getter getMe
   @Getter getUsers
   @Getter getTimelineEvents
+  @Getter getTeam
+  @Getter getTasks
   @Action setUsersRef
   created() {
     this.setUsersRef()
@@ -31,8 +38,20 @@ export default class extends Vue {
   get timelineEvents() {
     return this.getTimelineEvents
   }
+  get team() {
+    return this.getTeam
+  }
   get users() {
     return this.getUsers
+  }
+  get beggining_wday() {
+    return this.team.beggining_wday
+  }
+  get holiday_wdays() {
+    return this.team.holiday_wdays
+  }
+  get tasks() {
+    return this.getTasks
   }
 }
 </script>

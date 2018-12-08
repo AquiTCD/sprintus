@@ -70,6 +70,7 @@ export const state = (): object => ({
       user: 'uk9c9RcfPenLLiSCY1MX',
       range: 'enli3dIfHv20kr3O5oPZ',
       current_week: true,
+      weekday: 2,
       labels: [
         {
           name: 'user_label',
@@ -101,6 +102,12 @@ export const getters = {
   },
   getUsers(state) {
     return state.users
+  },
+  getTeam(state) {
+    return state.teams[0]
+  },
+  getTasks(state) {
+    return state.tasks
   },
 }
 export const mutations = {
