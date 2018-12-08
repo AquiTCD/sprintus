@@ -23,7 +23,5 @@ export default class extends Vue {
 }
 </script>
 
-<style scoped lang="sass">
-.heading
-
+<style scoped lang="stylus">
 </style>
