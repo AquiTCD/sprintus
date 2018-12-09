@@ -1,3 +1,4 @@
+import { resolve } from 'path'
 const parseArgs = require("minimist")
 const argv = parseArgs(process.argv.slice(2), {
   alias: {
@@ -26,7 +27,7 @@ module.exports = {
   },
   mode: 'spa',
   head: {
-    title: "tt1",
+    title: "sprintus",
     meta: [
       { charset: "utf-8" },
       {
@@ -55,16 +56,16 @@ module.exports = {
   /*
   ** Build configuration
   */
-  css: ["~/assets/styles/main.sass"],
+  css: ["~/assets/styles/main.styl"],
   build: {},
   modules: [
     "@nuxtjs/axios",
     '@nuxtjs/dotenv',
     "~/modules/typescript.js",
-    ['nuxt-sass-resources-loader']
-  ],
-  sassResources: [
-    '~/assets/styles/_config.sass'
+    ['nuxt-stylus-resources-loader', [
+      resolve(__dirname, './assets/styles/_variables.styl'),
+      resolve(__dirname, './assets/styles/_mixins.styl'),
+    ]],
   ],
   plugins: [
     { src: '~plugins/vuesax' },
