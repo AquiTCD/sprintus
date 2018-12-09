@@ -29,8 +29,10 @@ export default class extends Vue {
   @Getter getTeam
   @Getter getTasks
   @Action setUsersRef
+  @Action setMonologuesRef
   created() {
     this.setUsersRef()
+    this.setMonologuesRef()
   }
   get me() {
     return this.getMe

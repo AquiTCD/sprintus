@@ -1,12 +1,19 @@
 import { db } from '~/plugins/firebase'
 import { firebaseMutations, firebaseAction } from 'vuexfire'
+import { continueStatement } from 'babel-types'
 const usersRef = db.collection('users')
+const organizationsRef = db.collection('organizations')
+const teamsRef = db.collection('teams')
+const monologuesRef = db.collection('monologues')
 export const state = (): object => ({
   me: {
     id: 'uk9c9RcfPenLLiSCY1MX',
-    name: 'a-user',
-    default_monologue_range: 'organization',
-    default_task_range: 'team',
+    name: 'currentUSer',
+    avatar: '',
+    preferences: {
+      defaultMonologueRange: 'organization',
+      defaultTaskRange: 'team',
+    },
     labels: [
       {
         name: 'user_label',
@@ -15,6 +22,10 @@ export const state = (): object => ({
     ],
     createdAt: '2018-12-07T00:00:00.000Z',
     updatedAt: '2018-12-08T12:30:00.000Z',
+  },
+  currentRange: {
+    type: 'team',
+    id: 'enli3dIfHv20kr3O5oPZ',
   },
   organizations: [
     {
@@ -50,8 +61,10 @@ export const state = (): object => ({
     {
       id: 'uk9c9RcfPenLLiSCY1MX',
       name: 'a-user',
-      default_monologue_range: 'organization',
-      default_task_range: 'team',
+      preferences: {
+        defaultMonologueRange: 'organization',
+        defaultTaskRange: 'team',
+      },
       labels: [
         {
           name: 'user_label',
@@ -85,7 +98,6 @@ export const state = (): object => ({
     {
       id: 'yc2Ayly5T13b8VhhWkWe',
       user: 'uk9c9RcfPenLLiSCY1MX',
-      range: 'mT91Dcvq9SPyrK1bxemZ',
       line: 'happy',
       createdAt: '2018-12-07T00:00:00.000Z',
       updatedAt: '2018-12-08T12:30:00.000Z',
@@ -116,5 +128,35 @@ export const mutations = {
 export const actions = {
   setUsersRef: firebaseAction(({ bindFirebaseRef }) => {
     bindFirebaseRef('users', usersRef)
+  }),
+  setMonologuesRef: firebaseAction(({ bindFirebaseRef }) => {
+    // teamsRef.doc(`${context.state.currentRange.id}`).collection('monologues')
+    const ref = teamsRef.doc('enli3dIfHv20kr3O5oPZ').collection('monologues')
+    bindFirebaseRef('monologues', ref)
+  }),
+  addMonologue: firebaseAction((context, line) => {
+    const timestamp = new Date()
+    const monologue = {
+      user: {
+        id: context.state.me.id,
+        name: context.state.me.name,
+        avatar: context.state.me.avatar,
+      },
+      line: line,
+      createdAt: timestamp,
+      updatedAt: timestamp,
+    }
+    let parentRef
+    if (context.state.currentRange.type === 'organization') {
+      parentRef = organizationsRef
+    } else if (context.state.currentRange.type === 'team') {
+      parentRef = teamsRef
+    } else if (context.state.currentRange.type === 'users') {
+      parentRef = usersRef
+    }
+    parentRef
+      .doc(`${context.state.currentRange.id}`)
+      .collection('monologues')
+      .add(monologue)
   }),
 }

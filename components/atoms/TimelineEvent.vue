@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    p {{event.user}}
+    p {{event.user.name}}
     p {{event.line}}
 </template>
 
