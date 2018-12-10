@@ -1,5 +1,5 @@
 <template lang="pug">
-  th {{text}}
+  th.header-item {{text}}
 </template>
 
 <script lang="ts">

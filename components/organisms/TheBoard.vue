@@ -4,7 +4,7 @@
       thead
         BoardHeader(:wdays="wdays")
       tbody
-        BoardMyTasks(
+        BoardMyTasks.member(
           :me="me"
           :wdays="wdays"
           :tasks="myTasks")
@@ -60,7 +60,6 @@ export default class TheBoard extends Vue {
 </script>
 
 <style scoped lang="stylus">
-.the-board,
-.board
-  width: 100%
+.member
+  border-bottom: 2px solid #ccc
 </style>

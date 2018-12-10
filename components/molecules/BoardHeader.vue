@@ -1,11 +1,11 @@
 <template lang="pug">
-  tr
-    BoardHeaderItem(:text="firstText")
-    BoardHeaderWday(
+  tr.header
+    BoardHeaderItem.cell(:text="firstText")
+    BoardHeaderWday.cell(
       v-for="wday in wdays"
       :key="wday"
       :wday="wday")
-    BoardHeaderItem(:text="lastText")
+    BoardHeaderItem.cell(:text="lastText")
 </template>
 
 <script lang="ts">
@@ -26,4 +26,14 @@ export default class BoardHeader extends Vue {
 </script>
 
 <style scoped lang="stylus">
+.header
+  border-bottom: 3px solid #ccc
+.cell
+  font-weight: bold
+  min-width: 200px
+  text-align: center
+  &:first-child
+    min-width: 128px
+  &:not(:last-child)
+    border-right: 3px solid #ccc
 </style>

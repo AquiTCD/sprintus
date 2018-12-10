@@ -1,5 +1,5 @@
 <template lang="pug">
-  th.wday {{weekday}}
+  th.header-item.wday {{weekday}}
 </template>
 
 <script lang="ts">

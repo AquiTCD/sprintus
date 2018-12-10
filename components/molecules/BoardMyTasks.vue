@@ -1,7 +1,7 @@
 <template lang="pug">
   tr
-    BoardUserInfo(:me="me")
-    BoardUserTasksOfWday(
+    BoardUserInfo.cell(:me="me")
+    BoardUserTasksOfWday.cell(
       v-for="tasksOfWday in tasksOfWdays"
       :tasks="tasksOfWday"
     )
@@ -27,4 +27,13 @@ export default class BoardMyTasks extends Vue {
 </script>
 
 <style scoped lang="stylus">
+.cell
+  min-width: 200px
+  word-break: break-all
+  &:first-child
+    font-weight: bold
+    min-width: 128px
+    text-align: center
+  &:not(:last-child)
+    border-right: 3px solid #ccc
 </style>

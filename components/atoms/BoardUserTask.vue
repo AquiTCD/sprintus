@@ -1,6 +1,6 @@
 <template lang="pug">
   li
-    vs-checkbox(v-model="checkBox1") {{task.title}}
+    vs-checkbox.clear(v-model="checkBox1") {{task.title}}
 </template>
 
 <script lang="ts">

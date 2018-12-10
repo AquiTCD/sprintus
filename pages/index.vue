@@ -65,6 +65,9 @@ export default class extends Vue {
 .the-timeline
   border-right: $grey-tint 5px solid
   height: 100%
+  min-width: 256px
   overflow-y: scroll
-  width: 256px
+.the-board
+  overflow-x: scroll
+  // min-width: 1800px
 </style>

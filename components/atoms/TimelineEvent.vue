@@ -1,7 +1,7 @@
 <template lang="pug">
   div.event
     div.user
-      img.avator(:src="avatarUrl")
+      img.avatar(:src="avatarUrl")
       div.info
         p.name {{event.user.name}}
         p.timestamp {{ this.event.createdAt.toDate() | toDatetimeMMDDHHMM }}
@@ -33,7 +33,7 @@ export default class Me extends Vue {
   display: flex
   flex-direction: row
   width: 100%
-.avator
+.avatar
   border-radius: 28px
   height: 56px
   width: 56px
