@@ -70,6 +70,7 @@ module.exports = {
   plugins: [
     { src: '~plugins/vuesax' },
     '~/plugins/firebase',
+    '~/plugins/filters',
   ],
   axios: {}
 }

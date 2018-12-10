@@ -1,6 +1,7 @@
 import { db } from '~/plugins/firebase'
 import { firebaseMutations, firebaseAction } from 'vuexfire'
-import { continueStatement } from 'babel-types'
+// import { continueStatement } from 'babel-types'
+import { orderBy } from 'lodash'
 const usersRef = db.collection('users')
 const organizationsRef = db.collection('organizations')
 const teamsRef = db.collection('teams')
@@ -110,7 +111,7 @@ export const getters = {
     return state.me
   },
   getTimelineEvents(state) {
-    return state.monologues
+    return orderBy(state.monologues, 'createdAt', 'desc')
   },
   getUsers(state) {
     return state.users

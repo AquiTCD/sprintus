@@ -1,7 +1,7 @@
 <template lang="pug">
   div
-    Me(:me="me")
-    TimelineEvent(v-for="event in events"
+    Me.my_line(:me="me")
+    TimelineEvent.timeline_event(v-for="event in events"
       :event="event"
       :key="event.id")
 </template>
@@ -23,4 +23,8 @@ export default class TheTimeline extends Vue {
 </script>
 
 <style scoped lang="stylus">
+.my_line
+  border-bottom: $grey-tint solid 3px
+.timeline_event
+  border-bottom: $grey-tint solid 1px
 </style>

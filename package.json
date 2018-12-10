@@ -9,6 +9,7 @@
     "kouto-swiss": "^1.1.0",
     "lodash": "^4.17.11",
     "material-icons": "^0.2.3",
+    "moment": "^2.22.2",
     "nuxt": "^2.3.4",
     "nuxt-property-decorator": "^1.2.0",
     "vuesax": "^3.8.0",

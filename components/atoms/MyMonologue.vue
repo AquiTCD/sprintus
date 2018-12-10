@@ -12,8 +12,10 @@ export default class MyMonologue extends Vue {
   line = ''
   @Action addMonologue
   postLine() {
-    this.addMonologue(this.line)
-    this.line = ''
+    if (this.line) {
+      this.addMonologue(this.line)
+      this.line = ''
+    }
   }
 }
 </script>
