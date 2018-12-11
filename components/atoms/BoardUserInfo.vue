@@ -1,7 +1,8 @@
 <template lang="pug">
   td.user
-    img.avatar(:src="avatarUrl")
-    p {{me.name}}
+    vs-avatar(:size="avatarSize" :src="me.avatar" v-if="me.avatar")
+    vs-avatar(:size="avatarSize" :text="me.name" v-else)
+    p.name {{me.name}}
 </template>
 
 <script lang="ts">
@@ -9,13 +10,7 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator'
 @Component
 export default class BoardUserInfo extends Vue {
   @Prop(Object) me
-  get avatarUrl() {
-    if (!this.me.avatar) {
-      return 'https://pbs.twimg.com/profile_images/983688001581531138/OEkUPmHv_400x400.jpg'
-    } else {
-      return this.me.avatar
-    }
-  }
+  avatarSize = '48px'
 }
 </script>
 
@@ -24,4 +19,6 @@ export default class BoardUserInfo extends Vue {
   border-radius: 28px
   height: 56px
   width: 56px
+.name
+  padding: 3px 5px 13px
 </style>

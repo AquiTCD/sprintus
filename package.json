@@ -12,6 +12,7 @@
     "moment": "^2.22.2",
     "nuxt": "^2.3.4",
     "nuxt-property-decorator": "^1.2.0",
+    "ress": "^1.2.2",
     "vuesax": "^3.8.0",
     "vuex-class": "^0.3.0",
     "vuexfire": "^3.0.0-alpha.10"

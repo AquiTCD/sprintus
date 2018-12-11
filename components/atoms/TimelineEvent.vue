@@ -1,11 +1,11 @@
 <template lang="pug">
   div.event
     div.user
-      img.avatar(:src="avatarUrl")
-      div.info
-        p.name {{event.user.name}}
-        p.timestamp {{ this.event.createdAt.toDate() | toDatetimeMMDDHHMM }}
+      vs-avatar(:size="avatarSize" :src="avatarUrl" v-if="event.user.avatar")
+      vs-avatar(:size="avatarSize" :text="event.user.name" v-else)
+      p.name {{event.user.name}}
     p.line {{event.line}}
+    p.timestamp {{ this.event.createdAt.toDate() | toDatetimeMMDDHHMM }}
 </template>
 
 <script lang="ts">
@@ -15,13 +15,7 @@ import MyMonologue from '~/components/atoms/MyMonologue.vue'
 @Component
 export default class Me extends Vue {
   @Prop(Object) event?
-  get avatarUrl() {
-    if (!this.event.user.avatar) {
-      return 'https://pbs.twimg.com/profile_images/983688001581531138/OEkUPmHv_400x400.jpg'
-    } else {
-      return this.event.user.avatar
-    }
-  }
+  avatarSize = '48px'
 }
 </script>
 
@@ -29,23 +23,20 @@ export default class Me extends Vue {
 .event
   padding: 7px
 .user
-  align-items: flex-start
+  align-items: center
   display: flex
   flex-direction: row
+  justify-content: start
   width: 100%
-.avatar
-  border-radius: 28px
-  height: 56px
-  width: 56px
-.info
-  padding-left: 13px
 .name
-  align-self: flex-start
   font-weight: bold
   line-height: 1.25em
+  padding-left: 13px
+.line
+  line-height: 1.2
+  padding: 7px
 .timestamp
   align-self: flex-end
   font-size: 0.8em
-  line-height: 1.25em
   text-align: right
 </style>

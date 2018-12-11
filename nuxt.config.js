@@ -56,7 +56,7 @@ module.exports = {
   /*
   ** Build configuration
   */
-  css: ["~/assets/styles/main.styl"],
+  css: ['ress/dist/ress.min.css', "~/assets/styles/main.styl"],
   build: {},
   modules: [
     "@nuxtjs/axios",

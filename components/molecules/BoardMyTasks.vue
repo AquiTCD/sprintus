@@ -1,20 +1,23 @@
 <template lang="pug">
   tr
     BoardUserInfo.cell(:me="me")
-    BoardUserTasksOfWday.cell(
+    BoardUserTasks.cell(
       v-for="tasksOfWday in tasksOfWdays"
       :tasks="tasksOfWday"
+    )
+    BoardUserTasks.cell(
+      :tasks="pendingTasks"
     )
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import BoardUserInfo from '~/components/atoms/BoardUserInfo.vue'
-import BoardUserTasksOfWday from '~/components/molecules/BoardUserTasksOfWday.vue'
+import BoardUserTasks from '~/components/molecules/BoardUserTasks.vue'
 @Component({
   components: {
     BoardUserInfo,
-    BoardUserTasksOfWday,
+    BoardUserTasks,
   },
 })
 export default class BoardMyTasks extends Vue {
@@ -22,6 +25,9 @@ export default class BoardMyTasks extends Vue {
   @Prop(Array) tasks: Array<object>
   get tasksOfWdays() {
     return this.tasks
+  }
+  get pendingTasks() {
+    return null
   }
 }
 </script>

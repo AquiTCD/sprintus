@@ -1,6 +1,6 @@
 <template lang="pug">
   li
-    vs-checkbox.clear(v-model="checkBox1") {{task.title}}
+    vs-checkbox(v-model="done") {{task.title}}
 </template>
 
 <script lang="ts">
@@ -8,6 +8,7 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator'
 @Component
 export default class BoardUserTask extends Vue {
   @Prop(Object) task: object
+  done = false
 }
 </script>
 

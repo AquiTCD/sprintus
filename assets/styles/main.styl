@@ -3,10 +3,6 @@
 // Frameworks and Plugins for it with formatting
 // ============================================================
 @import '../../node_modules/kouto-swiss'
-
-meyer-reset()
-box-sizing-reset()
-
 // follows atomic design concept
 // ============================================================
 // base settings *order sensitive*
@@ -15,10 +11,16 @@ box-sizing-reset()
 @import '_mixins'
 @import '_base'
 
+// partial resets
+ol,
+ul
+  list-style: none
+  list-style-type: none
+table
+  border-collapse: collapse
+  border-spacing: 0
 // adjust vuesax
 .vs-checkbox--check
-  letter-spacing: initial
-  line-height: initial
   .material-icons
     font-size: initial
 .vs-component.con-vs-checkbox
