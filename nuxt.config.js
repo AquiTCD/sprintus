@@ -89,7 +89,6 @@ module.exports = {
     '~/assets/styles/main.sass'
   ],
   plugins: [
-    { src: '~plugins/vuesax' },
     '~/plugins/firebase',
   ],
   axios: {}
