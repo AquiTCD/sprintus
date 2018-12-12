@@ -2,7 +2,8 @@
   tr
     BoardUserInfo(:me="me")
     BoardUserTasksOfWday(
-      v-for="tasksOfWday in tasksOfWdays"
+      v-for="tasksOfWday,idx in tasksOfWdays"
+      :key="idx"
       :tasks="tasksOfWday"
     )
 </template>

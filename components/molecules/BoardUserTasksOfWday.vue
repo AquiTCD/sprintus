@@ -22,4 +22,7 @@ export default class BoardUserTasksOfWday extends Vue {
 </script>
 
 <style scoped lang="sass">
+ul
+  list-style: none
+  list-style-type: none
 </style>
