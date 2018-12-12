@@ -52,20 +52,41 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: "#3B8070" },
+  loading: { color: "#FF6F61" },
   /*
   ** Build configuration
   */
-  css: ["~/assets/styles/main.styl"],
+  css: [
+    {
+      src: '~/assets/styles/main.sass',
+      lang: 'sass',
+    },
+    {
+      src: '@fortawesome/fontawesome-free-webfonts',
+      lang: 'scss',
+    },
+    // {
+    //   src: '@fortawesome/fontawesome-free-webfonts/scss/fa-brands.scss',
+    //   lang: 'scss',
+    // },
+    // {
+    //   src: '@fortawesome/fontawesome-free-webfonts/scss/fa-regular.scss',
+    //   lang: 'scss',
+    // },
+    // {
+    //   src: '@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss',
+    //   lang: 'scss',
+    // }
+  ],
   build: {},
   modules: [
     "@nuxtjs/axios",
     '@nuxtjs/dotenv',
     "~/modules/typescript.js",
-    ['nuxt-stylus-resources-loader', [
-      resolve(__dirname, './assets/styles/_variables.styl'),
-      resolve(__dirname, './assets/styles/_mixins.styl'),
-    ]],
+    ['nuxt-sass-resources-loader']
+  ],
+  sassResources: [
+    '~/assets/styles/main.sass'
   ],
   plugins: [
     { src: '~plugins/vuesax' },
