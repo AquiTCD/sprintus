@@ -10,5 +10,5 @@ export default class BoardUserInfo extends Vue {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="sass">
 </style>

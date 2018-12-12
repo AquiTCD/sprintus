@@ -26,5 +26,5 @@ export default class BoardMyTasks extends Vue {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="sass">
 </style>

@@ -11,5 +11,5 @@ export default class MyInfo extends Vue {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="sass">
 </style>

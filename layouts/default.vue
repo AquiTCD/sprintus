@@ -21,5 +21,5 @@ import TheFooter from '~/components/organisms/TheFooter.vue'
 export default class extends Vue {}
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="sass">
 </style>
