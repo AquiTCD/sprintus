@@ -56,12 +56,12 @@ export default class extends Vue {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="sass">
 .main
   display: flex
   height: 100vh
 .the-timeline
-  border-right: $grey-tint 5px solid
+  border-right: $border-color 5px solid
   height: 100%
   width: 256px
 </style>

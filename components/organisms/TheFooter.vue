@@ -25,7 +25,7 @@ export default class TheFooter extends Vue {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="sass">
 .the_footer
   align-items: flex-end
   display: flex

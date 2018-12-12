@@ -1,6 +1,8 @@
 <template lang="pug">
   li
-    vs-checkbox(v-model="checkBox1") {{task.title}}
+    label.form-checkbox
+      input(type="checkbox")
+      i.form-icon Remember me
 </template>
 
 <script lang="ts">
@@ -11,5 +13,5 @@ export default class BoardUserTask extends Vue {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="sass">
 </style>

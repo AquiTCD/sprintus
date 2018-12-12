@@ -59,7 +59,7 @@ export default class TheBoard extends Vue {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped lang="sass">
 .the-board,
 .board
   width: 100%

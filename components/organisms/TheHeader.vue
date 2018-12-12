@@ -1,11 +1,9 @@
 <template lang="pug">
-  header.the_header
-    vs-navbar.brand(v-model="activeItem"
-              color="primary")
-      vs-navbar-title.brand Sprintus
-
-      vs-spacer
-      vs-button.new-task_btn(color="secondary" type="filled" icon="add_box") New Task
+  header.the_header.navbar.bg-primary
+    section.navbar-section
+      .navbar-brand Sprintus
+    section.navbar-section
+      button.btn.bg-secondary New Task
 </template>
 
 <script lang="ts">
@@ -14,8 +12,8 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator'
 export default class TheHeader extends Vue {}
 </script>
 
-<style scoped lang="stylus">
-.brand
+<style scoped lang="sass">
+.navbar-brand
   color: $pure-black
   font-size: 1em
 .new-task_btn
