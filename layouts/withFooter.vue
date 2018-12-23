@@ -1,23 +1,25 @@
 <template lang="pug">
   div.body
-    TheHeaderOnlyLogo.body-header()
-    nuxt.background
+    TheHeader.body-header()
+    nuxt
+    TheFooter.body-footer()
 </template>
 
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { State, Getter, Action } from 'vuex-class'
-import TheHeaderOnlyLogo from '~/components/atoms/TheHeaderOnlyLogo.vue'
+import TheHeader from '~/components/organisms/TheHeader.vue'
+import TheFooter from '~/components/organisms/TheFooter.vue'
+
 @Component({
   components: {
-    TheHeaderOnlyLogo,
+    TheHeader,
+    TheFooter,
   },
 })
 export default class extends Vue {}
 </script>
 
 <style scoped lang="sass">
-.backbround
-  background-color: $secondary-color
 </style>
