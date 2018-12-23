@@ -1,11 +1,12 @@
 <template lang="pug">
-  tr
-    BoardHeaderItem(:text="firstText")
-    BoardHeaderWday(
-      v-for="wday in wdays"
-      :key="wday"
-      :wday="wday")
-    BoardHeaderItem(:text="lastText")
+  thead
+    tr.header
+      BoardHeaderItem.cell(:text="firstText")
+      BoardHeaderWday.cell(
+        v-for="wday in wdays"
+        :key="wday"
+        :wday="wday")
+      BoardHeaderItem.cell(:text="lastText")
 </template>
 
 <script lang="ts">
@@ -20,10 +21,20 @@ import BoardHeaderWday from '~/components/atoms/BoardHeaderWday.vue'
 })
 export default class BoardHeader extends Vue {
   @Prop(Array) wdays: Array<number>
-  firstText = 'User'
+  firstText = 'Members'
   lastText = 'Pendings'
 }
 </script>
 
 <style scoped lang="sass">
+.header
+  border-bottom: 5px solid $border-color
+.cell
+  font-weight: bold
+  min-width: 200px
+  text-align: center
+  &:first-child
+    min-width: 128px
+  &:not(:last-child)
+    border-right: 3px solid $border-color
 </style>
