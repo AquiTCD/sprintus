@@ -1,5 +1,6 @@
 import * as firebase from 'firebase/app'
 import 'firebase/firestore'
+import 'firebase/auth'
 if (!firebase.apps.length) {
   const config = {
     apiKey: process.env.API_KEY,
@@ -13,4 +14,14 @@ if (!firebase.apps.length) {
 }
 const db = firebase.firestore()
 db.settings({ timestampsInSnapshots: true })
-export { db }
+
+const auth = firebase.auth()
+const provider = new firebase.auth.GoogleAuthProvider()
+const authenticator = function(): any {
+  return new Promise((resolve, reject) => {
+    auth.onAuthStateChanged(user => {
+      resolve(user || false)
+    })
+  })
+}
+export { firebase, db, auth, authenticator, provider }

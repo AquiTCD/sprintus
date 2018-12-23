@@ -25,7 +25,7 @@ module.exports = {
       process.env.BASE_URL ||
       `http://${host}:${port}`
   },
-  mode: 'spa',
+  // mode: 'spa',
   head: {
     title: "sprintus",
     meta: [
@@ -83,13 +83,15 @@ module.exports = {
     "@nuxtjs/axios",
     '@nuxtjs/dotenv',
     "~/modules/typescript.js",
-    ['nuxt-sass-resources-loader']
+    ['nuxt-sass-resources-loader'],
+    ['cookie-universal-nuxt', { parseJSON: false }]
   ],
   sassResources: [
     '~/assets/styles/main.sass'
   ],
   plugins: [
     '~/plugins/firebase',
+    '~/plugins/filters',
   ],
   axios: {}
 }

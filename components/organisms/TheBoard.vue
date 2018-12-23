@@ -1,66 +1,48 @@
 <template lang="pug">
   div.the-board
     table.board
-      thead
-        BoardHeader(:wdays="wdays")
-      tbody
-        BoardMyTasks(
-          :me="me"
-          :wdays="wdays"
-          :tasks="myTasks")
-        //- BoardMemberTasks(
-        //-   v-for="member in members"
-        //-   :key="member.id"
-        //-   :member="member"
-        //-   :wdays="wdays")
+      BoardHeader(:wdays="wdays")
+      BoardBody(
+        :me="me"
+        :wdays="wdays"
+        :tasks="tasks"
+        :members="members"
+      )
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import BoardHeader from '~/components/molecules/BoardHeader.vue'
-import BoardMyTasks from '~/components/molecules/BoardMyTasks.vue'
-// import BoardMemberTasks from '~/components/molecules/BoardMemberTasks.vue'
-import { forEach, filter, groupBy } from 'lodash'
+import BoardBody from '~/components/molecules/BoardBody.vue'
+import { difference } from 'lodash'
 @Component({
   components: {
     BoardHeader,
-    BoardMyTasks,
-    // BoardMemberTasks,
+    BoardBody,
   },
 })
 export default class TheBoard extends Vue {
-  @Prop(Number) beggining_wday: number
-  @Prop(Array) holiday_wdays: Array<number>
+  @Prop(Number) begginingWeekday: number
+  @Prop(Array) holidayWeekdays: Array<number>
   @Prop(Object) me
+  @Prop(Array) members: Array<object>
   @Prop(Array) tasks: Array<object>
-  @Prop(Array) events: Array<object>
   get wdays() {
     const wdays: Array<number> = []
     for (let i = 0; i < 7; i++) {
-      let wday: number = this.beggining_wday + i
+      let wday: number = this.begginingWeekday + i
       if (wday >= 7) {
         wday -= 7
       }
-      if (this.holiday_wdays.some(holiday => holiday !== wday)) {
-        wdays.push(wday)
-      }
+      wdays.push(wday)
     }
-    return wdays
-  }
-  get myTasks() {
-    const myTasks = filter(this.tasks, { user: this.me.id })
-    const myTasksWithWeek: Array<any> = []
-    forEach(this.wdays, wday => {
-      const task = filter(myTasks, { weekday: wday })
-      myTasksWithWeek.push(task)
-    })
-    return myTasksWithWeek
+    return difference(wdays, this.holidayWeekdays)
   }
 }
 </script>
 
 <style scoped lang="sass">
-.the-board,
 .board
+  border-right: 5px solid $border-color
   width: 100%
 </style>

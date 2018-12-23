@@ -1,0 +1,31 @@
+<template lang="pug">
+main.main
+  .modal.active
+    .modal-container
+      .modal-header
+        .modal-title.h3 LogOut
+      .modal-body
+        .content
+          p Sprintusからログアウトしました
+      //- .modal-footer(v-if="isloggedIn")
+</template>
+
+<script lang="ts">
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Getter, Action } from 'vuex-class'
+import { auth, provider } from '~/plugins/firebase'
+@Component({})
+export default class extends Vue {
+  fetch({ app }) {
+    auth
+      .signOut()
+      .then(() => {
+        app.$cookies.remove('sprintus-access-token')
+      })
+      .catch(error => {})
+  }
+}
+</script>
+
+<style scoped lang="sass">
+</style>
