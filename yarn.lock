@@ -1079,6 +1079,11 @@
   dependencies:
     "@types/babel-types" "*"
 
+"@types/cookie@^0.3.1":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.3.2.tgz#453f4b14b25da6a8ea4494842dedcbf0151deef9"
+  integrity sha512-aHQA072E10/8iUQsPH7mQU/KUyQBZAGzTVRCUvnSz8mSvbrYsP4xEO2RSA0Pjltolzi0j8+8ixrm//Hr4umPzw==
+
 "@types/node@^10.12.10":
   version "10.12.10"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.10.tgz#4fa76e6598b7de3f0cb6ec3abacc4f59e5b3a2ce"
@@ -2496,6 +2501,21 @@ cookie-signature@1.0.6:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/cookie-signature/-/cookie-signature-1.0.6.tgz#e303a882b342cc3ee8ca513a79999734dab3ae2c"
   integrity sha1-4wOogrNCzD7oylE6eZmXNNqzriw=
+
+cookie-universal-nuxt@^2.0.11:
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/cookie-universal-nuxt/-/cookie-universal-nuxt-2.0.11.tgz#f7f2ea1d63a497b24d5e630cee4e999475e777f4"
+  integrity sha512-GmzXjkIpCRAe+fIpYavHyFliEDRofiJMbBd17kZJia+nLVEt2CJxjOqcQRqUOXmvtuB0oHDYy+fVflxs863T0w==
+  dependencies:
+    "@types/cookie" "^0.3.1"
+    cookie-universal "^2.0.11"
+
+cookie-universal@^2.0.11:
+  version "2.0.11"
+  resolved "https://registry.yarnpkg.com/cookie-universal/-/cookie-universal-2.0.11.tgz#525f6324b6698a713b46be77a3440daff68e4a6a"
+  integrity sha512-5IA+uAPwBuphUfuk+lpFEajfrUTZA3RmMXfoT/KWs29WMd2ZifHOafAr+w8WdlSixddjTEkOgUWrk27+ErueUg==
+  dependencies:
+    cookie "^0.3.1"
 
 cookie@0.3.1, cookie@^0.3.1:
   version "0.3.1"
@@ -5857,6 +5877,11 @@ mixin-object@^2.0.1:
   integrity sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
   dependencies:
     minimist "0.0.8"
+
+moment@^2.22.2:
+  version "2.22.2"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
+  integrity sha1-PCV/mDn8DpP/UxSWMiOeuQeD/2Y=
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -9358,13 +9383,6 @@ vue@^2.5.17:
   version "2.5.17"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
   integrity sha512-mFbcWoDIJi0w0Za4emyLiW72Jae0yjANHbCVquMKijcavBGypqlF7zHRgMa5k4sesdv7hv2rB4JPdZfR+TPfhQ==
-
-vuesax@^3.8.0:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/vuesax/-/vuesax-3.8.0.tgz#8f7b63e1b4e2f223d7c97eab0f0b6d6496027921"
-  integrity sha512-xRBtLJoHDrxT43mXtZNvbrGzCNECxYeYrQi/U+U87+a2yMKByWqypFDt2UK29uhTbHlMTShL+wu7HiYTYtJwvw==
-  dependencies:
-    vue "^2.5.17"
 
 vuex-class@^0.3.0:
   version "0.3.1"
