@@ -20,6 +20,7 @@ const host =
   process.env.npm_package_config_nuxt_host ||
   "localhost"
 module.exports = {
+  srcDir: 'src',
   env: {
     baseUrl:
       process.env.BASE_URL ||
@@ -78,7 +79,15 @@ module.exports = {
     //   lang: 'scss',
     // }
   ],
-  build: {},
+  build: {
+    extend(config) {
+      config.module.rules.forEach(rule => {
+        if (rule.test.toString() === '/\\.vue$/') {
+          rule.options.optimizeSSR = false
+        }
+      })
+    }
+  },
   modules: [
     "@nuxtjs/axios",
     '@nuxtjs/dotenv',

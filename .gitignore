@@ -252,4 +252,7 @@ typings/
 # Serverless directories
 .serverless
 
-
+# firebase
+.firebase
+.firebaserc
+.runtimeconfig.json

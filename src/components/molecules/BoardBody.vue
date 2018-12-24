@@ -23,9 +23,9 @@ import { forEach, omit, map, filter } from 'lodash'
 })
 export default class BoardBody extends Vue {
   @Prop(Object) me
-  @Prop(Array) members: Array<object>
-  @Prop(Array) tasks: Array<object>
-  @Prop(Array) wdays: Array<number>
+  @Prop(Array) members: any[]
+  @Prop(Array) tasks: any[]
+  @Prop(Array) wdays: number[]
   get tasksByUser() {
     const tasksByUser = {}
     const memberIds = map(this.members, 'id')
