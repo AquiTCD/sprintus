@@ -204,7 +204,7 @@ export const getters = {
     return state.me
   },
   getTimelineEvents(state) {
-    let scopedEvents = []
+    let scopedEvents: any[] = []
     if (state.currentParams.team) {
       const teamEvents = filter(state.monologues, {
         range: 'team',
@@ -266,7 +266,7 @@ export const getters = {
     return state.currentParams
   },
   getTasks(state) {
-    let scopedTasks = []
+    let scopedTasks: any[] = []
     if (state.currentParams.team) {
       const teamTasks = filter(state.tasks, {
         range: 'team',
