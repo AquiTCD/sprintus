@@ -490,6 +490,13 @@ export const actions = {
     const ref = organizationsRef.doc(context.state.currentParams.organization)
     ref.collection('monologues').add(monologue)
   },
+  async deleteMonologue(context, id) {
+    const ref = organizationsRef.doc(context.state.currentParams.organization)
+    ref
+      .collection('monologues')
+      .doc(id)
+      .delete()
+  },
   async addTask(context, newTask) {
     const timestamp = new Date()
     const task: Task = {

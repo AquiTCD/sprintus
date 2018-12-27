@@ -5,19 +5,31 @@
         img(:src="member.avatarUrl" v-if="member.avatarUrl")
       p.name {{member.name}}
     p.line {{event.line}}
-    .timestamp
-      time {{ this.event.createdAt.toDate() | toDatetimeMMDDHHMM }}
+    .footer
+      .delete-icon.c-hand
+        .i.fas.fa-trash-alt(@click="deleteMyMonologue" v-if="isMine")
+      .timestamp
+        time {{ this.event.createdAt.toDate() | toDatetimeMMDDHHMM }}
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { Getter } from 'vuex-class'
+import { Getter, Action } from 'vuex-class'
 @Component
 export default class TimelineEvent extends Vue {
   @Prop(Object) event?
+  @Action deleteMonologue
   @Getter getMemberById
   get member() {
     return this.getMemberById(this.event.memberId)
+  }
+  get isMine(): boolean {
+    return this.event.memberId === this.$store.state.me.id
+  }
+  deleteMyMonologue(): void {
+    if (this.isMine) {
+      this.deleteMonologue(this.event.id)
+    }
   }
 }
 </script>
@@ -45,9 +57,14 @@ export default class TimelineEvent extends Vue {
   padding: 8px
   font-size: 0.8em
   margin-bottom: 0
-.timestamp
+.footer
   font-size: 0.8em
   margin-bottom: 0
   text-align: right
-  color: $gray-color-dark
+  .delete-icon
+    display: inline-block
+    padding-right: 0.5em
+  .timestamp
+    display: inline-block
+    color: $gray-color-dark
 </style>
