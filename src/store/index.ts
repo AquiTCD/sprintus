@@ -524,6 +524,14 @@ export const actions = {
       .doc(updatingContents.id)
       .update(updatingContents)
   },
+  async deleteTaskById(context, id) {
+    const timestamp = new Date()
+    const ref = organizationsRef.doc(context.state.currentParams.organization)
+    ref
+      .collection('tasks')
+      .doc(id)
+      .delete()
+  },
   async addNewUser(context, userInfo) {
     const timestamp = new Date()
     const user: User = {

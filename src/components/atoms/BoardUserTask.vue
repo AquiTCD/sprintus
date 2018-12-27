@@ -1,24 +1,44 @@
 <template lang="pug">
   li.narrow
-    label.form-checkbox.narrow
-      input(type="checkbox" :checked="task.isDone" @change="toggleIsDone")
+    label.form-checkbox.narrow(@click.self.prevent.stop)
+      input(type="checkbox" :checked="task.isDone" @click.prevent="toggleIsDone")
       i.form-icon
-      span(:class="{done: task.isDone}") {{task.title}}
+      span(:class="{done: task.isDone}" @click.prevent="openEditTaskModal") {{task.title}}
+    EditTaskModal(:task="task" :isActive="isEditingTask" @closeModal="closeEditTaskModal")
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { State, Getter, Action } from 'vuex-class'
-@Component
+import EditTaskModal from '~/components/atoms/EditTaskModal.vue'
+@Component({
+  components: {
+    EditTaskModal,
+  },
+})
 export default class BoardUserTask extends Vue {
   @Action updateTaskById
   @Prop(Object) task
+  isEditingTask: boolean = false
+  get isMine(): boolean {
+    return this.task.memberId === this.$store.state.me.id
+  }
   toggleIsDone(): void {
-    const updatingContents = {
-      id: this.task.id,
-      isDone: !this.task.isDone,
+    if (this.isMine) {
+      const updatingContents = {
+        id: this.task.id,
+        isDone: !this.task.isDone,
+      }
+      this.updateTaskById(updatingContents)
     }
-    this.updateTaskById(updatingContents)
+  }
+  openEditTaskModal(): void {
+    if (this.isMine) {
+      this.isEditingTask = true
+    }
+  }
+  closeEditTaskModal(): void {
+    this.isEditingTask = false
   }
 }
 </script>
