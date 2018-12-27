@@ -1,4 +1,15 @@
-import { resolve } from 'path'
+import fs from 'fs'
+const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env'
+try {
+  fs.statSync(envFile)
+  require('dotenv').config()
+} catch (error) {
+  if (error.code === 'ENOENT') {
+    console.log(`${envFile} NOT FOUND`)
+  } else {
+    throw error
+  }
+}
 const parseArgs = require("minimist")
 const argv = parseArgs(process.argv.slice(2), {
   alias: {
@@ -24,9 +35,14 @@ module.exports = {
   env: {
     baseUrl:
       process.env.BASE_URL ||
-      `http://${host}:${port}`
+      `http://${host}:${port}`,
+    API_KEY: process.env.API_KEY,
+    AUTH_DOMAIN: process.env.AUTH_DOMAIN,
+    DATABASE_URL: process.env.DATABASE_URL,
+    PROJECT_ID: process.env.PROJECT_ID,
+    STORAGE_BUCKET: process.env.STORAGE_BUCKET,
+    MESSAGING_SENDER_ID: process.env.MESSAGING_SENDER_ID,
   },
-  // mode: 'spa',
   head: {
     title: "sprintus",
     meta: [
@@ -90,7 +106,7 @@ module.exports = {
   },
   modules: [
     "@nuxtjs/axios",
-    '@nuxtjs/dotenv',
+    ["@nuxtjs/dotenv", {filename: envFile}],
     "~/modules/typescript.js",
     ['nuxt-sass-resources-loader'],
     ['cookie-universal-nuxt', { parseJSON: false }]
