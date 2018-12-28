@@ -79,21 +79,9 @@ module.exports = {
       lang: 'sass',
     },
     {
-      src: '@fortawesome/fontawesome-free-webfonts',
-      lang: 'scss',
+      src: '@fortawesome/fontawesome-free/css/all.min.css',
+      lang: 'css',
     },
-    // {
-    //   src: '@fortawesome/fontawesome-free-webfonts/scss/fa-brands.scss',
-    //   lang: 'scss',
-    // },
-    // {
-    //   src: '@fortawesome/fontawesome-free-webfonts/scss/fa-regular.scss',
-    //   lang: 'scss',
-    // },
-    // {
-    //   src: '@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss',
-    //   lang: 'scss',
-    // }
   ],
   build: {
     extend(config) {
