@@ -1,5 +1,7 @@
 import fs from 'fs'
-const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env'
+const envFile = process.env.NODE_ENV === 'staging' ? '.env.staging' :
+                process.env.NODE_ENV === 'production' ? '.env.production' :
+                '.env'
 try {
   fs.statSync(envFile)
   require('dotenv').config()
@@ -94,7 +96,7 @@ module.exports = {
   },
   modules: [
     "@nuxtjs/axios",
-    ["@nuxtjs/dotenv", {filename: envFile}],
+    ["@nuxtjs/dotenv", { filename: envFile }],
     "~/modules/typescript.js",
     ['nuxt-sass-resources-loader'],
     ['cookie-universal-nuxt', { parseJSON: false }]

@@ -19,13 +19,16 @@
     "vuexfire": "^3.0.0-alpha.10"
   },
   "scripts": {
-    "dev": "nuxt",
+    "dev": "cp -f .env.development .env && nuxt",
     "build": "nuxt build && npm run build:copy:ssr",
     "build:copy:ssr": "rimraf functions/ssr && mkdirp functions/ssr && cp -R .nuxt/dist functions/ssr/dist",
     "serve": "firebase serve",
     "deploy": "firebase deploy",
     "start": "HOST=0.0.0.0 nuxt",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "release": "npx firebase use default && cp -f .env.development .env && npm run build && npm run deploy",
+    "release:stg": "npx firebase use staging && cp -f .env.staging .env && NODE_ENV=staging npm run build && npm run deploy",
+    "release:prod": "npx firebase use production && cp -f .env.production .env && NODE_ENV=production npm run build && npm run deploy"
   },
   "lint-staged": {
     "*.{js,ts,vue}": [
