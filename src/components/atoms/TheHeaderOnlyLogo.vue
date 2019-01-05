@@ -3,12 +3,20 @@
     section.navbar-section
       .navbar-brand
         h1.brand Sprintus
+    section.navbar-section
+      button.btn(@click="moveToLogin") Login
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-@Component
-export default class TheHeaderOnlyLogo extends Vue {}
+@Component({
+  components: {},
+})
+export default class TheHeaderOnlyLogo extends Vue {
+  moveToLogin(): void {
+    this.$router.push('/login')
+  }
+}
 </script>
 
 <style scoped lang="sass">
@@ -20,6 +28,7 @@ export default class TheHeaderOnlyLogo extends Vue {}
   width: 100vw
   z-index: 2
   padding: 8px 13px
+  min-heigth: 50px
 .brand
   color: $pure-black
   font-size: 1rem
