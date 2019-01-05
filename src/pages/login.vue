@@ -133,4 +133,6 @@ export default class extends Vue {
 </script>
 
 <style scoped lang="sass">
+.main
+  background-color: $twill
 </style>

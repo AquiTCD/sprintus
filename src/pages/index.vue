@@ -199,9 +199,9 @@ export default class extends Vue {
   border-left: 5px solid $beluga
   padding-left: 1rem
 .columns-line
-  &:not(:last-child)
+  &:not(:last-of-type)
     padding-bottom: 0.4rem
-  &:not(:first-child)
+  &:not(:first-of-type)
     padding-top: 0.4rem
 h1,h2,h3,h4,h5,h6
   font-weight: bold

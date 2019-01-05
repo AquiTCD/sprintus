@@ -40,10 +40,21 @@ export default class BoardUserTasksRow extends Vue {
 .cell
   min-width: 200px
   word-break: break-all
-  &:first-child
+  background-color: $white
+  &:first-of-type
     font-weight: bold
     min-width: 128px
     text-align: center
-  &:not(:last-child)
-    border-right: 3px solid $border-color
+.my-task, .member-task:last-of-type
+  .cell
+    &:first-of-type
+      border-radius: 0 0 0 $border-radius
+    &:last-of-type
+      border-radius: 0 0 $border-radius 0
+.member-task:nth-of-type(2)
+  .cell
+    &:first-of-type
+      border-radius: $border-radius 0 0 0
+    &:last-of-type
+      border-radius: 0 $border-radius 0 0
 </style>

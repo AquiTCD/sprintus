@@ -83,8 +83,8 @@ export default class extends Vue {
   display: flex
   height: 100vh
   overflow-y: scroll
+  background-color: $twill
 .the-timeline
-  border-right: $border-color 5px solid
   height: 100%
   overflow-y: scroll
   width: 256px
