@@ -22,7 +22,7 @@
     "dev": "cp -f .env.development .env && nuxt",
     "build": "nuxt build && npm run build:copy:ssr",
     "build:copy:ssr": "rimraf functions/ssr && mkdirp functions/ssr && cp -R .nuxt/dist functions/ssr/dist",
-    "lint": "eslint",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "serve": "firebase serve",
     "deploy": "firebase deploy",
     "start": "HOST=0.0.0.0 nuxt",
