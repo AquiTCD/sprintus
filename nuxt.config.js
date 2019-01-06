@@ -35,6 +35,7 @@ const host =
 module.exports = {
   srcDir: 'src',
   env: {
+    env: process.env.NODE_ENV,
     baseUrl:
       process.env.BASE_URL ||
       `http://${host}:${port}`,

@@ -76,6 +76,11 @@ export default class extends Vue {
   @Action addOrganization
   @Action updateUser
   @Action saveAccessToken
+  mounted() {
+    if (process.env.env === 'staging') {
+      this.organizationId = 'seesaa'
+    }
+  }
   async login() {
     try {
       this.isAuthing = true
