@@ -77,6 +77,8 @@ export default class extends Vue {
 </script>
 
 <style scoped lang="sass">
+.main
+  display: flex
 .the-timeline
   height: 100%
   overflow-y: scroll
