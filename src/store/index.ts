@@ -167,14 +167,14 @@ export const getters = {
     return !!state.me.id
   },
   getDefaultPath(state) {
-    if (!state.me) return ''
-    if (!state.me.preferences) return ''
-    if (!state.me.preferences.default) return ''
-    if (!state.me.preferences.default.path) return ''
-    if (!state.me.preferences.default.path.organizationId) return ''
-    let path = `${state.me.preferences.default.path.organizationId}/`
-    if (state.me.preferences.default.path.teamId) {
-      path += `${state.me.preferences.default.path.teamId}/`
+    let path
+    try {
+      path = `${state.me.preferences.default.path.organizationId}/`
+      if (state.me.preferences.default.path.teamId) {
+        path += `${state.me.preferences.default.path.teamId}/`
+      }
+    } catch (e) {
+      path = ''
     }
     return path
   },
@@ -579,27 +579,32 @@ export const actions = {
       createdAt: timestamp,
       updatedAt: timestamp,
     }
-    organizationsRef.doc(user.organizationId).set(organization)
+    await organizationsRef.doc(user.organizationId).set(organization)
     context.dispatch('joinToOrganization', user)
   },
   async joinToOrganization(context, user) {
     const timestamp = new Date()
     const org = organizationsRef.doc(user.organizationId)
-    const member = {
-      userRef: usersRef.doc(user.id),
-      name: user.name,
-      avatarUrl: user.avatarUrl,
-      teamIds: [],
-      tasks: [],
-      monologues: [],
-      createdAt: timestamp,
-      updatedAt: timestamp,
+    const doc = await org.get()
+    if (doc.exists) {
+      const member = {
+        userRef: usersRef.doc(user.id),
+        name: user.name,
+        avatarUrl: user.avatarUrl,
+        teamIds: [],
+        tasks: [],
+        monologues: [],
+        createdAt: timestamp,
+        updatedAt: timestamp,
+      }
+      await org
+        .collection('members')
+        .doc(user.id)
+        .set(member)
+      await org.update({ updatedAt: timestamp })
+    } else {
+      throw new Error('organization does not exist')
     }
-    org
-      .collection('members')
-      .doc(user.id)
-      .set(member)
-    org.update({ updatedAt: timestamp })
   },
   async updateOrganization(context, updatingContents: Organization) {
     const timestamp = new Date()
@@ -612,40 +617,43 @@ export const actions = {
       .collection('teams')
     const doc = await teamRef.doc(team.id).get()
     if (doc.exists) {
-      return console.log('team already exist')
-    }
-    const timestamp = new Date()
-    const choise = {
-      begginingWeekday: 1,
-      holidayWeekdays: [],
-    }
-    if (team.isOrganizationWeekday) {
-      choise.begginingWeekday = state.currentOrganization.begginingWeekday
+      throw new Error('team already exist')
     } else {
-      choise.begginingWeekday = team.begginingWeekday
+      const timestamp = new Date()
+      const choise = {
+        begginingWeekday: 1,
+        holidayWeekdays: [],
+      }
+      if (team.isOrganizationWeekday) {
+        choise.begginingWeekday = state.currentOrganization.begginingWeekday
+      } else {
+        choise.begginingWeekday = team.begginingWeekday
+      }
+      if (team.isOrganizationHolidays) {
+        choise.holidayWeekdays = state.currentOrganization.holidayWeekdays
+      } else {
+        choise.holidayWeekdays = team.holidayWeekdays
+      }
+      const teamName = team.name ? team.name : team.id
+      const newTeam: Team = {
+        name: teamName,
+        administratorIds: [state.me.id],
+        memberIds: [state.me.id],
+        pendings: {
+          administratorIds: [],
+          memberIds: [],
+        },
+        requiresApproval: team.requiresApproval,
+        isOrganizationWeekday: team.isOrganizationWeekday,
+        begginingWeekday: choise.begginingWeekday,
+        isOrganizationHolidays: team.isOrganizationHolidays,
+        holidayWeekdays: choise.holidayWeekdays,
+        createdAt: timestamp,
+        updatedAt: timestamp,
+      }
+      await teamRef.doc(team.id).set(newTeam)
+      return
     }
-    if (team.isOrganizationHolidays) {
-      choise.holidayWeekdays = state.currentOrganization.holidayWeekdays
-    } else {
-      choise.holidayWeekdays = team.holidayWeekdays
-    }
-    const newTeam: Team = {
-      name: team.name,
-      administratorIds: [state.me.id],
-      memberIds: [state.me.id],
-      pendings: {
-        administratorIds: [],
-        memberIds: [],
-      },
-      requiresApproval: team.requiresApproval,
-      isOrganizationWeekday: team.isOrganizationWeekday,
-      begginingWeekday: choise.begginingWeekday,
-      isOrganizationHolidays: team.isOrganizationHolidays,
-      holidayWeekdays: choise.holidayWeekdays,
-      createdAt: timestamp,
-      updatedAt: timestamp,
-    }
-    teamRef.doc(team.id).set(newTeam)
   },
   async updateTeam(context, updatingContents: User) {
     const timestamp = new Date()
@@ -659,6 +667,7 @@ export const actions = {
   async joinToTeam(context, teamId: string) {
     await context.dispatch('addMemberToTeam', teamId)
     await context.dispatch('addTeamToMember', teamId)
+    return
   },
   async addMemberToTeam(context, teamId: string) {
     const timestamp = new Date()
@@ -670,6 +679,7 @@ export const actions = {
       memberIds: firebase.firestore.FieldValue.arrayUnion(context.state.me.id),
       updatedAt: timestamp,
     })
+    return
   },
   async addTeamToMember(context, teamId: string) {
     const timestamp = new Date()
@@ -681,6 +691,7 @@ export const actions = {
       teamIds: firebase.firestore.FieldValue.arrayUnion(teamId),
       updatedAt: timestamp,
     })
+    return
   },
   async addOrganizationToUser(context, organizatinId: string) {
     const timestamp = new Date()
