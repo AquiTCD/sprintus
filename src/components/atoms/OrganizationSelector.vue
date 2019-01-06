@@ -76,7 +76,7 @@ export default class OrganizationSelector extends Vue {
   left: inherit
   right: 0
   width: 256px
-.disable
+li.menu-item > a.disable
   color: #ccc
   text-decoration: line-through
 </style>
