@@ -1,6 +1,6 @@
 <template lang="pug">
   .header-member.dropdown
-    .dropdown-toggle(tabindex="0")
+    .dropdown-toggle(tabindex="0").c-hand
       figure.avatar.nav-avatar(:data-initial="me.name | toInitialName" v-show="me.name" :class="{hasAvatar: me.avatarUrl}")
         img(:src="me.avatarUrl" v-if="me.avatarUrl")
     ul.menu.member-menu

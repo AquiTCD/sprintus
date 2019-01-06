@@ -153,12 +153,6 @@ export default class extends Vue {
 </script>
 
 <style scoped lang="sass">
-.main
-  padding-top: 50px
-  padding-bottom: 50px
-  height: 100vh
-  overflow-y: scroll
-  background-color: $twill
 .full-width-hero
   width: 100vw
   padding: 0 2em

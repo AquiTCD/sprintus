@@ -1,6 +1,7 @@
 <template lang="pug">
 main.main
   .modal.active
+    .modal-overlay
     .modal-container
       .modal-header
         .modal-title.h3 SignUp / SignIn
@@ -133,6 +134,4 @@ export default class extends Vue {
 </script>
 
 <style scoped lang="sass">
-.main
-  background-color: $twill
 </style>
