@@ -5,21 +5,21 @@ import _ from 'lodash'
 Vue.use(VueI18n)
 
 export default ({ app, store }) => {
-  let locale = 'en'
+  let locale = 'ja'
   // if (localStorage.locale) {
   //   locale = localStorage.locale
 
   // } else
   // @ts-ignore
-  if (process.client) {
-    const navigator: any = _.get(window, 'navigator', {})
-    locale = (
-      _.head(navigator.languages) ||
-      navigator.language ||
-      navigator.browserLanguage ||
-      navigator.userLanguage
-    ).substr(0, 2)
-  }
+  // if (process.client) {
+  //   const navigator: any = _.get(window, 'navigator', {})
+  //   locale = (
+  //     _.head(navigator.languages) ||
+  //     navigator.language ||
+  //     navigator.browserLanguage ||
+  //     navigator.userLanguage
+  //   ).substr(0, 2)
+  // }
   locale = locale === 'ja' ? 'ja' : 'en'
   app.i18n = new VueI18n({
     locale: locale,
