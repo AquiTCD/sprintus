@@ -46,7 +46,7 @@ module.exports = {
     MESSAGING_SENDER_ID: process.env.MESSAGING_SENDER_ID,
   },
   head: {
-    title: "sprintus",
+    title: "Sprintus",
     meta: [
       { charset: "utf-8" },
       {
@@ -107,6 +107,8 @@ module.exports = {
   plugins: [
     '~/plugins/firebase',
     '~/plugins/filters',
+    { src: '~/plugins/vee-validate', ssr: true },
+    '~/plugins/i18n',
   ],
   axios: {}
 }
