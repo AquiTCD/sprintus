@@ -4,10 +4,10 @@ main.main
     .modal-overlay
     .modal-container
       .modal-header
-        .modal-title.h3 LogOut
+        .modal-title.h3 {{$t('logout.title')}}
       .modal-body
         .content
-          p Sprintusからログアウトしました
+          p {{$t('logout.loggedOut')}}
       .modal-footer
         nuxt-link.btn.btn-primary(to="/") OK
 </template>
