@@ -2,44 +2,48 @@
 main.main
   .modal.active
     .modal-overlay
-    .modal-container
+    form.modal-container(@submit.prevent)
       .modal-header
-        .modal-title.h3 SignUp / SignIn
+        .modal-title.h3 {{$t('login.title')}}
       .modal-body
         .loading.loading-lg(v-if="isAuthing")
         .content(v-else)
           .logged_in(v-if="isloggedIn")
             .messages
-              p 「
-                span {{displayName}}
-                | 」としてログインしました
+              p {{$t('login.loginedName.prefix')}}{{displayName}}{{$t('login.loginedName.suffix')}}
             .continue(v-if="isSignedUp")
             .init(v-else)
               .divider.text-center(data-content="User Information")
-              h4 ユーザー
-              label.form-label(for="login-as-firsttime-name") 名前
+              h4 {{$t('login.user')}}
+              label.form-label(for="login-as-firsttime-name") {{$t('login.name')}}
               input.form-input#login-as-firsttime-name(type="text" :placeholder="displayName" v-model="user.name")
-              p ※設定からいつでも変更することができます
-              h4 所属組織
+              p {{$t('login.notice')}}
+              h4 {{$t('login.belongingOrganization')}}
               label.form-radio
                 input(type="radio" name="organization" value="join" v-model="joinOrCreate")
                 i.form-icon
-                span 既存のOrganizationに参加する
+                span {{$t('login.joinOrganization')}}
               label.form-radio
                 input(type="radio" name="organization" value="create" v-model="joinOrCreate")
                 i.form-icon
-                span 新規にOrganizationを作成する
+                span {{$t('login.createOrganization')}}
               .existed(v-if="joinOrCreate === 'join'")
-                label.form-label(for="login-as-firsttime-org") 既存のOrganization ID
-                input.form-input#login-as-firsttime-org(type="text" v-model="organizationId" pattern="^[0-9A-Za-z]+$")
+                label.form-label(for="login-as-firsttime-org") {{$t('login.existingOrganizaionId')}}
+                input.form-input#login-as-firsttime-org(
+                  type="text"
+                  v-model="organizationId"
+                  v-validate="{ required: true, regex: /^([a-zA-Z0-9_-]{3,})$/ }")
               .new-org(v-else)
-                label.form-label(for="login-as-firsttime-org") 新規に作成するOrganization ID
-                input.form-input#login-as-firsttime-org(type="text" v-model="organizationId" pattern="^[0-9A-Za-z]+$")
+                label.form-label(for="login-as-firsttime-org") {{$t('login.newOrganizaionId')}}
+                input.form-input#login-as-firsttime-org(
+                  type="text"
+                  v-model="organizationId"
+                  v-validate="{ required: true, regex: /^([a-zA-Z0-9_-]{3,})$/ }")
           .not_logged_in(v-else)
-            button.btn.btn-primary(@click="login") SignUp/Login by Google Account
+            button.btn.btn-primary(@click="login") {{$t('login.signUpOrLogin')}}
       .modal-footer(v-if="isloggedIn")
-        nuxt-link.btn.btn-primary(:to="getDefaultPath" v-if="isSignedUp") {{buttonText}}
-        button.btn.btn-primary(@click="joinOrCreateOrganization" v-else) {{buttonText}}
+        nuxt-link.btn.btn-primary(:to="getDefaultPath" v-if="isSignedUp") {{$t('login.startSprintus')}}
+        button.btn.btn-primary(type="submit" @click="joinOrCreateOrganization" v-else) {{$t(`login.joinOrCreate.${joinOrCreate}.prefix`)}}{{organizationId}}{{$t(`login.joinOrCreate.${joinOrCreate}.suffix`)}}
 </template>
 
 <script lang="ts">
@@ -59,22 +63,6 @@ export default class extends Vue {
     name: '',
     avatarUrl: '',
   }
-  get buttonText(): string {
-    const base = 'Sprintusを始める'
-    let orgnizationName = 'Organization'
-    if (this.organizationId) {
-      orgnizationName = this.organizationId
-    }
-    let msg
-    if (this.isSignedUp) {
-      msg = base
-    } else if (this.joinOrCreate === 'join') {
-      msg = orgnizationName + 'に参加して' + base
-    } else if (this.joinOrCreate === 'create') {
-      msg = orgnizationName + 'を新規作成して' + base
-    }
-    return msg
-  }
   get isSignedUp() {
     if (!this.getDefaultPath || this.getDefaultPath === '/') {
       return false
@@ -88,47 +76,57 @@ export default class extends Vue {
   @Action addOrganization
   @Action updateUser
   @Action saveAccessToken
-  login() {
-    this.isAuthing = true
-    auth
-      .signInWithPopup(provider)
-      .catch(error => alert('🤕' + error.message))
-      .then(
-        (data: any): void => {
-          this.createOrFindUser(data.user)
-          this.accessToken = data.user.uid
-          this.user.id = data.user.uid
-          this.user.name = data.user.displayName
-          this.user.avatarUrl = data.user.photoURL
-          this.displayName = data.user.displayName
-        }
-      )
-      .then(() => {
-        this.saveAccessToken(this.accessToken)
-        this.isloggedIn = true
-      })
-      .then(() => {
-        this.isAuthing = false
-      })
+  mounted() {
+    if (process.env.env === 'staging') {
+      this.organizationId = 'seesaa'
+    }
+  }
+  async login() {
+    try {
+      this.isAuthing = true
+      const data: any = await auth.signInWithPopup(provider)
+      await this.createOrFindUser(data.user)
+      this.accessToken = data.user.uid
+      this.user.id = data.user.uid
+      this.user.name = data.user.displayName
+      this.user.avatarUrl = data.user.photoURL
+      this.displayName = data.user.displayName
+      await this.saveAccessToken(this.accessToken)
+      const sleep = msec => new Promise(resolve => setTimeout(resolve, msec))
+      await sleep(1000)
+      this.isloggedIn = true
+      this.isAuthing = false
+    } catch (e) {
+      alert(e.message)
+    }
   }
   async joinOrCreateOrganization() {
-    const user = {
-      id: this.user.id,
-      name: this.user.name,
-      avatarUrl: this.user.avatarUrl,
-      organizationId: this.organizationId,
+    try {
+      const valid = await this.$validator.validateAll()
+      if (!valid) {
+        throw new Error('form inputs are invalid')
+      }
+      const organizationId = this.organizationId.toLowerCase()
+      const user = {
+        id: this.user.id,
+        name: this.user.name,
+        avatarUrl: this.user.avatarUrl,
+        organizationId: organizationId,
+      }
+      if (this.joinOrCreate === 'join') {
+        await this.joinToOrganization(user)
+      } else {
+        await this.addOrganization(user)
+      }
+      await this.updateUser({
+        id: this.user.id,
+        'preferences.default.path.organizationId': user.organizationId,
+        organizationIds: [user.organizationId],
+      })
+      this.$router.push('/' + organizationId)
+    } catch (e) {
+      alert(e.message)
     }
-    if (this.joinOrCreate === 'join') {
-      await this.joinToOrganization(user)
-    } else {
-      await this.addOrganization(user)
-    }
-    await this.updateUser({
-      id: this.user.id,
-      'preferences.default.path.organizationId': user.organizationId,
-      organizationIds: [user.organizationId],
-    })
-    this.$router.push('/' + this.organizationId)
   }
 }
 </script>

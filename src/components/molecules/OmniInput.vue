@@ -2,24 +2,34 @@
   .omni-input
     .input-group
       select.form-select.select-lg.input_select(v-model="selectedType")
-        option(v-for="typeOption in typeOptions" :value="typeOption.value" :key="typeOption.value") {{typeOption.text}}
+        option(v-for="typeOption in typeOptions"
+          :value="typeOption"
+          :key="typeOption") {{$t(typeOption)}}
       select.form-select.select-lg.input_select(v-model="selectedRange")
-        option(v-for="option in currentRangeOptions" :value="option.value" :key="option.value") {{option.text}}
-      input.form-input.input-lg.input_text(type="text" placeholder="task/monologue" v-model="content")
-      button(v-if="!taskFormExpanded").btn.btn-primary.input-group-btn.btn-lg.input_btn(@click="post") Post
-    .form-horizontal(v-if="taskFormExpanded")
+        option(v-for="option in currentRangeOptions"
+          :value="option"
+          :key="option") {{$t(`range.${option}`)}}
+      input.form-input.input-lg.input_text(
+        type="text"
+        :placeholder="$t(contentPlaceholder)"
+        v-model="content")
+      button(v-if="!isTaskForm").btn.btn-primary.input-group-btn.btn-lg.input_btn(@click="post") Post
+    .form-horizontal(v-if="isTaskForm")
       .task-form.form-group
         .col-2
           label.form-switch
             input(type="checkbox" v-model="isCurrentWeek")
             i.form-icon
-            span This Week
+            span {{$t('omniinput.currentWeek')}}
           .input-group
-            span.input-group-addon Weekday
+            span.input-group-addon {{$t('omniinput.weekday')}}
             select.form-select.select-lg.input_select(v-model="weekday")
-              option(v-for="wday in wdays" :value="wday.value" :key="wday.value") {{wday.text}}
+              option(v-for="wday in wdays"
+                :value="wday"
+                :key="wday") {{$t(`weekday.${wday}`)}}
         .col-9
-          textarea#omni-input_descritpion.form-input(placeholder="Task Descriptions" rows="3" v-model="description")
+          textarea#omni-input_descritpion.form-input(
+            :placeholder="$t('omniinput.description')" rows="3" v-model="description")
         .col-1.align-right
           button.btn.btn-primary.input-group-btn.btn-lg.btn_maximum(@click="postTask") Post
 </template>
@@ -30,27 +40,11 @@ import { Action, Getter } from 'vuex-class'
 @Component
 export default class OmniInput extends Vue {
   selectedType: string = 'monologue'
-  typeOptions: { text: string; value: string }[] = [
-    { text: 'New Monologue', value: 'monologue' },
-    { text: 'New Task', value: 'task' },
-  ]
+  typeOptions: string[] = ['monologue', 'task']
   selectedRange: string = 'organization'
-  rangeOptions: { text: string; value: string }[] = [
-    { text: 'Organization', value: 'organization' },
-    { text: 'Team', value: 'team' },
-    { text: 'Me', value: 'me' },
-  ]
-  wdays: { text: string; value: number }[] = [
-    { text: '日', value: 0 },
-    { text: '月', value: 1 },
-    { text: '火', value: 2 },
-    { text: '水', value: 3 },
-    { text: '木', value: 4 },
-    { text: '金', value: 5 },
-    { text: '土', value: 6 },
-  ]
+  rangeOptions: string[] = ['organization', 'team', 'me']
+  wdays: number[] = [0, 1, 2, 3, 4, 5, 6]
   content: string = ''
-  taskFormExpanded: boolean = false
   description: string = ''
   isCurrentWeek: boolean = true
   weekday: number = new Date().getDay()
@@ -58,7 +52,7 @@ export default class OmniInput extends Vue {
   @Action addMonologue
   @Action addTask
   get currentRangeOptions() {
-    const options: { text: string; value: string }[] = []
+    const options: string[] = []
     options.push(this.rangeOptions[0])
     if (this.getCurrentParams.team) {
       options.push(this.rangeOptions[1])
@@ -66,42 +60,40 @@ export default class OmniInput extends Vue {
     options.push(this.rangeOptions[2])
     return options
   }
-  post(): void {
-    if (this.content) {
-      if (this.selectedType === 'monologue') {
-        const monologue = {
-          line: this.content,
-          range: this.selectedRange,
-        }
-        this.addMonologue(monologue)
-        this.clearForm()
-      } else if (this.selectedType === 'task') {
-        this.taskFormExpand()
-      } else {
-        return
+  get contentPlaceholder() {
+    return `omniinput.placeholder.${this.selectedType}`
+  }
+  get isTaskForm() {
+    return this.selectedType === 'task'
+  }
+  async post() {
+    if (this.content && !this.isTaskForm) {
+      const monologue = {
+        line: this.content,
+        range: this.selectedRange,
       }
+      await this.addMonologue(monologue)
+      await this.clearForm()
     }
   }
-  taskFormExpand(): void {
-    this.taskFormExpanded = true
-  }
-  postTask(): void {
-    const newTask = {
-      range: this.selectedRange,
-      title: this.content,
-      description: this.description,
-      weekday: this.weekday,
-      isCurrentWeek: this.isCurrentWeek,
+  async postTask() {
+    if (this.content && this.isTaskForm) {
+      const newTask = {
+        range: this.selectedRange,
+        title: this.content,
+        description: this.description,
+        weekday: this.weekday,
+        isCurrentWeek: this.isCurrentWeek,
+      }
+      await this.addTask(newTask)
+      await this.clearForm()
     }
-    this.addTask(newTask)
-    this.clearForm()
   }
-  clearForm(): void {
+  async clearForm() {
     this.content = ''
     this.description = ''
     this.isCurrentWeek = true
     this.weekday = new Date().getDay()
-    this.taskFormExpanded = false
   }
 }
 </script>

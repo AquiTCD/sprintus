@@ -35,6 +35,7 @@ const host =
 module.exports = {
   srcDir: 'src',
   env: {
+    env: process.env.NODE_ENV,
     baseUrl:
       process.env.BASE_URL ||
       `http://${host}:${port}`,
@@ -46,7 +47,7 @@ module.exports = {
     MESSAGING_SENDER_ID: process.env.MESSAGING_SENDER_ID,
   },
   head: {
-    title: "sprintus",
+    title: "Sprintus",
     meta: [
       { charset: "utf-8" },
       {
@@ -107,6 +108,8 @@ module.exports = {
   plugins: [
     '~/plugins/firebase',
     '~/plugins/filters',
+    { src: '~/plugins/vee-validate', ssr: true },
+    '~/plugins/i18n',
   ],
   axios: {}
 }

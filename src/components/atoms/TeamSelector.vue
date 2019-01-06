@@ -4,19 +4,18 @@
       span.dropping {{getCurrentTeamName}} ▼
       i.icon.icon-caret.dropping
     ul.menu.team-menu
-      li.menu-item
-        nuxt-link(:to="organizationPath") {{getCurrentOrganizationName}} に戻る
       li.divider(:data-content="dropTitle" v-if="hasCurrentTeam")
       li.menu-item(v-if="hasCurrentTeam && hasPermission")
-        a(@click="openEditGroupModal") 設定変更
+        a(@click="openEditGroupModal") {{$t('header.team.setting')}}
       li.menu-item(v-if="hasCurrentTeam && !hasPermission")
-        a(@click="openRequestPermissionModal") 管理権限を申請
+        //- a(@click="openRequestPermissionModal") 管理権限を申請
+        a.disable {{$t('header.team.claimPermission')}}
       li.divider(data-content="Teamに参加/移動")
       li.menu-item(v-for="team in getTeamPathWithNames" :key="team.path")
         nuxt-link(:to="team.path") {{team.name}}
       li.divider
       li.menu-item
-        a(@click="openCreateTeamModal") Teamを新規作成
+        a(@click="openCreateTeamModal") {{$t('header.team.createTeam')}}
     EditGroupModal(:isActive="isEditingGroup" :forOrganization="false" @closeModal="closeEditGroupModal")
     CreateTeamModal(:isActive="isCreatingTeam" @closeModal="closeCreateTeamModal")
     RequestPermissionModal(:isActive="isRequestingPermission" :forOrganization="false" @closeModal="closeRequestPermissionModal" v-if="!hasPermission")
@@ -88,4 +87,7 @@ export default class TeamSelector extends Vue {
   color: $body-font-color
 .menu.team-menu
   width: 256px
+li.menu-item > a.disable
+  color: #ccc
+  text-decoration: line-through
 </style>

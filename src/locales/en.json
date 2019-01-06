@@ -1,0 +1,91 @@
+{
+  "organization": "Organization",
+  "team": "Team",
+  "task": "Task",
+  "monologue": "Monologue",
+  "range": {
+    "organization": "Entire Organization",
+    "team": "Current Team Only",
+    "me": "Private"
+  },
+  "weekday": {
+    "0": "SUN",
+    "1": "MON",
+    "2": "TUE",
+    "3": "WED",
+    "4": "THU",
+    "5": "FRI",
+    "6": "SAT"
+  },
+  "login": {
+    "title": "SignUp/Login",
+    "loginedName": {
+      "prefix": "LoggedIn as [",
+      "suffix": "]"
+    },
+    "user": "User",
+    "name": "Name",
+    "notice": "* you can update user info any time from settings",
+    "belongingOrganization": "Beloinging Organization",
+    "joinOrganization": "Join Existing Organization",
+    "createOrganization": "Create New Organizaion",
+    "existingOrganizaionId": "Existing Organization ID",
+    "newOrganizaionId": "New Organization ID",
+    "signUpOrLogin": "SignUp/Login by Google Account",
+    "startSprintus": "Start Sprintus",
+    "joinOrCreate": {
+      "join": {
+        "prefix": "Join Organization[",
+        "suffix": "] and @:login.startSprintus"
+      },
+      "create": {
+        "prefix": "Create Organization[",
+        "suffix": "] and @:login.startSprintus"
+      }
+    }
+  },
+  "logout": {
+    "title": "Logged Out",
+    "loggedOut": "Logged Out from Sprintus"
+  },
+  "omniinput": {
+    "placeholder": {
+      "monologue": "Monologue...",
+      "task": "Task Title"
+    },
+    "description": "Task Description",
+    "weekday": "Weekday",
+    "currentWeek": "This Week"
+  },
+  "header": {
+    "organization": {
+      "backTo": "Back To %{organization}",
+      "setting": "Setting",
+      "claimPermission": "Claim Permission",
+      "changeOrganization": "Change Other Organization",
+      "createOrganization": "Create New Organization"
+    },
+    "team": {
+      "setting": "Setting",
+      "claimPermission": "Claim Permission",
+      "createOrganization": "Create New Team"
+    },
+    "me": {
+      "setting": "Setting",
+      "logout": "Logout"
+    }
+  },
+  "createTeam": {
+    "title": "Create Team",
+    "teamId": "Tam ID",
+    "notice": "* Only lower alphabets, it is not possible to change ID later.",
+    "name": "Team Name",
+    "namePlaceholder": "Display Team Name",
+    "requireApproval": "require approval to join（not yet）",
+    "begginingWeekday": "Beggining Weekday",
+    "isOrganizationWeekday": "@:createTeam.begginingWeekday follows %{organization}",
+    "holidayWeekdays": "Holidays",
+    "isOrganizationHolidays": "@:createTeam.holidayWeekdays follows%{organization}",
+    "createButton": "Create %{team} in %{organization}"
+  }
+}

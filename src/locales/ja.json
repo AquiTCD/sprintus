@@ -1,0 +1,91 @@
+{
+  "organization": "組織",
+  "team": "チーム",
+  "task": "タスク",
+  "monologue": "独り言",
+  "range": {
+    "organization": "組織全体",
+    "team": "このチームのみ",
+    "me": "非公開"
+  },
+  "weekday": {
+    "0": "日",
+    "1": "月",
+    "2": "火",
+    "3": "水",
+    "4": "木",
+    "5": "金",
+    "6": "土"
+  },
+  "login": {
+    "title": "サインアップ/ログイン",
+    "loginedName": {
+      "prefix": "「",
+      "suffix": "」としてログインしました"
+    },
+    "user": "ユーザー",
+    "name": "名前",
+    "notice": "※ 設定からいつでも変更することができます",
+    "belongingOrganization": "所属組織",
+    "joinOrganization": "既存のOrganizationに参加する",
+    "createOrganization": "新規にOrganizationを作成する",
+    "existingOrganizaionId": "既存のOrganization ID",
+    "newOrganizaionId": "新規に作成するOrganization ID",
+    "signUpOrLogin": "Googleアカウントで サインアップ/ログイン",
+    "startSprintus": "Sprintus を始める",
+    "joinOrCreate": {
+      "join": {
+        "prefix": "組織「",
+        "suffix": "」に参加して@:login.startSprintus"
+      },
+      "create": {
+        "prefix": "組織「",
+        "suffix": "」を新規作成して@:login.startSprintus"
+      }
+    }
+  },
+  "logout": {
+    "title": "ログアウト",
+    "loggedOut": "Sprintusからログアウトしました"
+  },
+  "omniinput": {
+    "placeholder": {
+      "monologue": "独り言...",
+      "task": "タスクのタイトル"
+    },
+    "description": "タスクの説明",
+    "weekday": "曜日",
+    "currentWeek": "今週"
+  },
+  "header": {
+    "organization": {
+      "backTo": "%{organization}に戻る",
+      "setting": "設定",
+      "claimPermission": "管理権限を申請",
+      "changeOrganization": "他の組織に移動",
+      "createOrganization": "組織を新規作成"
+    },
+    "team": {
+      "setting": "設定",
+      "claimPermission": "管理権限を申請",
+      "createTeam": "チームを新規作成"
+    },
+    "me": {
+      "setting": "設定",
+      "logout": "ログアウト"
+    }
+  },
+  "createTeam": {
+    "title": "チームを新規作成",
+    "teamId": "チームID",
+    "notice": "※ 英数字小文字のみ, IDは後から変更することはできません",
+    "name": "チーム名",
+    "namePlaceholder": "表示チーム名",
+    "requireApproval": "参加には承認が必要（未実装）",
+    "begginingWeekday": "週の開始曜日",
+    "isOrganizationWeekday": "@:createTeam.begginingWeekday は%{organization}に従う",
+    "holidayWeekdays": "休日の曜日",
+    "isOrganizationHolidays": "@:createTeam.holidayWeekdays は%{organization}に従う",
+    "createButton": "%{team}を%{organization}に新規作成"
+  }
+}
