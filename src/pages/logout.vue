@@ -1,13 +1,15 @@
 <template lang="pug">
 main.main
   .modal.active
+    .modal-overlay
     .modal-container
       .modal-header
         .modal-title.h3 LogOut
       .modal-body
         .content
           p Sprintusからログアウトしました
-      //- .modal-footer(v-if="isloggedIn")
+      .modal-footer
+        nuxt-link.btn.btn-primary(to="/") OK
 </template>
 
 <script lang="ts">

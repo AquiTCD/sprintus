@@ -1,7 +1,7 @@
 <template lang="pug">
   div.body
     TheHeader.body-header()
-    nuxt
+    nuxt.nuxt
     TheFooter.body-footer()
 </template>
 
@@ -22,4 +22,10 @@ export default class extends Vue {}
 </script>
 
 <style scoped lang="sass">
+.nuxt
+  padding-top: 50px
+  padding-bottom: 50px
+  height: 100vh
+  overflow-y: scroll
+  background-color: $twill
 </style>

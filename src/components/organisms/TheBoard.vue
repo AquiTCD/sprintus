@@ -43,6 +43,8 @@ export default class TheBoard extends Vue {
 
 <style scoped lang="sass">
 .board
-  border-right: 5px solid $border-color
   width: 100%
+  border-collapse: separate
+  border-spacing: 0.125rem
+  padding: 0.25rem
 </style>

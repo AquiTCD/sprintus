@@ -1,7 +1,7 @@
 <template lang="pug">
   div.body
     TheHeaderOnlyLogo.body-header()
-    nuxt.background
+    nuxt.nuxt
 </template>
 
 
@@ -18,6 +18,10 @@ export default class extends Vue {}
 </script>
 
 <style scoped lang="sass">
-.backbround
-  background-color: $secondary-color
+.nuxt
+  padding-top: 50px
+  padding-bottom: 50px
+  height: 100vh
+  overflow-y: scroll
+  background-color: $twill
 </style>

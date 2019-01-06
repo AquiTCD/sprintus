@@ -1,8 +1,7 @@
 <template lang="pug">
   header.the_header.navbar
     section.navbar-section
-      .navbar-brand
-        h1.brand Sprintus
+      NavbarLogo
     section.navbar-center
       h2.range
         OrganizationSelector
@@ -14,11 +13,13 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { State, Getter, Action } from 'vuex-class'
+import NavbarLogo from '~/components/atoms/NavbarLogo.vue'
 import HeaderUser from '~/components/atoms/HeaderUser.vue'
 import OrganizationSelector from '~/components/atoms/OrganizationSelector.vue'
 import TeamSelector from '~/components/atoms/TeamSelector.vue'
 @Component({
   components: {
+    NavbarLogo,
     HeaderUser,
     OrganizationSelector,
     TeamSelector,
@@ -41,11 +42,6 @@ export default class TheHeader extends Vue {
   width: 100vw
   z-index: 2
   padding: 8px 13px
-.brand
-  color: $pure-black
-  font-size: 1rem
-  font-weight: bold
-  margin-bottom: 0
 .range
   font-size: 0.9rem
   margin-bottom: 0

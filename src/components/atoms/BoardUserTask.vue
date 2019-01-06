@@ -3,7 +3,7 @@
     label.form-checkbox.narrow(@click.self.prevent.stop)
       input(type="checkbox" :checked="task.isDone" @click.prevent="toggleIsDone")
       i.form-icon
-      span(:class="{done: task.isDone}" @click.prevent="openEditTaskModal") {{task.title}}
+      span.c-hand(:class="{done: task.isDone}" @click.prevent="openEditTaskModal") {{task.title}}
     EditTaskModal(:task="task" :isActive="isEditingTask" @closeModal="closeEditTaskModal")
 </template>
 

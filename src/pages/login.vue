@@ -1,6 +1,7 @@
 <template lang="pug">
 main.main
   .modal.active
+    .modal-overlay
     .modal-container
       .modal-header
         .modal-title.h3 SignUp / SignIn

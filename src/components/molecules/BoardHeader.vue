@@ -27,14 +27,14 @@ export default class BoardHeader extends Vue {
 </script>
 
 <style scoped lang="sass">
-.header
-  border-bottom: 5px solid $border-color
 .cell
   font-weight: bold
   min-width: 200px
   text-align: center
-  &:first-child
+  background-color: $white
+  &:first-of-type
     min-width: 128px
-  &:not(:last-child)
-    border-right: 3px solid $border-color
+    border-radius: $border-radius 0 0 0
+  &:last-of-type
+    border-radius: 0 $border-radius 0 0
 </style>

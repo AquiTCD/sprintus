@@ -22,4 +22,5 @@ export default class TheFooter extends Vue {}
   background: $secondary-color
   width: 100vw
   padding: 8px 13px
+  z-index: 1
 </style>

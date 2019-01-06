@@ -37,6 +37,8 @@ export default class TimelineEvent extends Vue {
 <style scoped lang="sass">
 .event
   padding: 8px
+  background: $white
+  border-radius: $border-radius
 .user
   display: flex
   flex-direction: row

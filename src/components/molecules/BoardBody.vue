@@ -1,11 +1,11 @@
 <template lang="pug">
   tbody
-    BoardUserTasksRow.me(
+    BoardUserTasksRow.my-task(
       :memberId="me.id"
       :wdays="wdays"
       :tasks="myTasks")
-    BoardUserTasksRow.member(
-      v-for="member,key in memberTasks"
+    BoardUserTasksRow.member-task(
+      v-for="(member,key,i) in memberTasks"
       :key="key"
       :memberId="key"
       :wdays="wdays"
@@ -58,14 +58,19 @@ export default class BoardBody extends Vue {
   get memberTasks() {
     return omit(this.tasksByUser, this.me.id)
   }
+  indexToClass(i) {
+    const count = Object.keys(this.memberTasks).length
+    if (count > 1) {
+      if (i === 0) {
+        return 'first'
+      } else if (i + 1 === count) {
+        return 'last'
+      }
+    }
+  }
 }
 </script>
 
 <style scoped lang="sass">
-.me
-  border-bottom: 5px solid $border-color
-.member
-  border-bottom: 3px solid $border-color
-  &:last-child
-    border-bottom: 5px solid $border-color
+
 </style>
