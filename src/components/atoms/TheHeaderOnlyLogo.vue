@@ -1,16 +1,18 @@
 <template lang="pug">
   header.the_header.navbar
     section.navbar-section
-      .navbar-brand
-        h1.brand Sprintus
+      NavbarLogo
     section.navbar-section
       button.btn(@click="moveToLogin") Login
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import NavbarLogo from '~/components/atoms/NavbarLogo.vue'
 @Component({
-  components: {},
+  components: {
+    NavbarLogo,
+  },
 })
 export default class TheHeaderOnlyLogo extends Vue {
   moveToLogin(): void {
