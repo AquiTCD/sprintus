@@ -11,12 +11,12 @@
         a(@click="") English
       li.divider(data-content="設定")
       li.menu-item
-        a(@click="openEditMeModal") 設定変更
+        a(@click="openEditMeModal") {{$t('header.me.setting')}}
       //- li.menu-item
         a(@click="openRequestPermissionModal") 管理権限を承認
       li.divider
       li.menu-item
-        nuxt-link(to="/logout") ログアウト
+        nuxt-link(to="/logout") {{$t('header.me.logout')}}
     EditMeModal(:isActive="isEditingMe" @closeModal="closeEditMeModal")
 </template>
 
