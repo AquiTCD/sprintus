@@ -1,6 +1,6 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
-import { Nuxt } from 'nuxt'
+const { Nuxt } = require('nuxt') // eslint-disable-line typescript/no-var-requires
 
 const nuxt = new Nuxt({ buildDir: 'ssr', dev: false })
 export const ssr = functions.https.onRequest(nuxt.render)
